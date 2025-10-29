@@ -1,14 +1,21 @@
-function App() {
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import ExperienceDetails from './pages/ExperienceDetails';
+import Checkout from './pages/Checkout';
+import Confirmation from './pages/Confirmation';
+
+const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-blue-500 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Tailwind Test</h1>
-        <button className="bg-yellow-400 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500">
-          Click Me
-        </button>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/experience/:id" element={<ExperienceDetails />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/confirmation" element={<Confirmation />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
