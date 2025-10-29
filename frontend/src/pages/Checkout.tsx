@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import Header from '../components/
-Header';
+import Header from '../components/Header';
 import { bookingAPI, promoAPI } from '../services/api';
-import type { Experience, Slot } from '../types'
-;
+import type { Experience, Slot } from '../types';
 
 interface LocationState {
   experience: Experience;
