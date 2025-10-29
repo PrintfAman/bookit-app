@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Check } from 'lucide-react';
-import Header from '../Components/Header';
+import Header from '../components/
+Header';
 
 interface LocationState {
   bookingReference: string;
