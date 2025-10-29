@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import Header from '../components/
-Header';
-import DateSelector from '../components/
-DateSelector';
-import TimeSlotSelector from '../components/
-TimeSlotSelector';
-import PriceSummary from '../components/
-PriceSummary';
+import Header from '../components/Header';
+import DateSelector from '../components/DateSelector';
+import TimeSlotSelector from '../components/TimeSlotSelector';
+import PriceSummary from '../components/PriceSummary';
 import { experienceAPI } from '../services/api';
-import type { Experience, Slot } from '../types'
-;
-
+import type { Experience, Slot } from '../types';
 const ExperienceDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();

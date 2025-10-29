@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/
-Header';
-import ExperienceCard from '../components/
-ExperienceCard';
+import Header from '../components/Header';
+import ExperienceCard from '../components/ExperienceCard';
 import { experienceAPI } from '../services/api';
-import type { Experience } from '../types'
-;
+import type { Experience } from '../types';
 
 const Home: React.FC = () => {
   const [experiences, setExperiences] = useState<Experience[]>([]);
