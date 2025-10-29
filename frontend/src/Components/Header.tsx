@@ -1,5 +1,6 @@
 import React from 'react';
-import { MapPin, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   searchQuery?: string;
@@ -8,15 +9,29 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ searchQuery, onSearchChange, onSearch }) => {
+  const navigate = useNavigate();
+
   return (
     <header className="bg-white border-b sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-white border-2 border-pink-500 rounded-lg flex items-center justify-center">
-              <MapPin className="w-6 h-6" />
+          <div 
+            className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition"
+            onClick={() => navigate('/')}
+          >
+            <img 
+              src="/image.png" 
+              alt="HD Logo" 
+              className="h-12 w-auto object-contain"
+            />
+            <div className="flex flex-col leading-none">
+              <span className="font-semibold text-2 text-gray-900 tracking-tight" style={{ fontFamily: 'Arial, Helvetica, sans-serif', fontWeight: 600 }}>
+                highway
+              </span>
+              <span className="font-semibold text-2 text-gray-900 tracking-tight" style={{ fontFamily: 'Arial, Helvetica, sans-serif', fontWeight: 600 }}>
+                delite
+              </span>
             </div>
-            <span className="font-bold text-xl">highway delite</span>
           </div>
 
           {onSearchChange && (

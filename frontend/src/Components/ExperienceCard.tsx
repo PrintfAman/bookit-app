@@ -1,5 +1,5 @@
-import React from 'react';
-import type { Experience } from '../types';
+import React, { useState } from 'react';
+import type { Experience } from '../Types';
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -7,13 +7,20 @@ interface ExperienceCardProps {
 }
 
 const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, onViewDetails }) => {
+  const [imageError, setImageError] = useState(false);
+  
+  // Fallback placeholder image
+  const placeholderImage = 'https://via.placeholder.com/400x300/e5e7eb/6b7280?text=Experience';
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <div className="relative">
         <img
-          src={experience.image_url}
+          src={imageError ? placeholderImage : experience.image_url}
           alt={experience.title}
           className="w-full h-48 object-cover"
+          onError={() => setImageError(true)}
+          loading="lazy"
         />
       </div>
       <div className="p-4">
