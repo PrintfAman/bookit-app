@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Experience } from '../types'
+import type { Experience } from '../types';
 ;
 
 interface ExperienceCardProps {
