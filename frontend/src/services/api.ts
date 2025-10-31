@@ -1,6 +1,5 @@
 import axios from 'axios';
-import type { Experience, Booking, BookingRequest, PromoCodeResponse } from '../types'
-;
+import type { Experience, Booking, BookingRequest, PromoCodeResponse } from '../types';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -11,7 +10,6 @@ const api = axios.create({
   },
 });
 
-// Interceptor for logging
 api.interceptors.request.use(
   (config) => {
     console.log(`API Request: ${config.method?.toUpperCase()} ${config.url}`);

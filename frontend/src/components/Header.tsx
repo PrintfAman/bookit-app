@@ -25,10 +25,10 @@ const Header: React.FC<HeaderProps> = ({ searchQuery, onSearchChange, onSearch }
               className="h-12 w-auto object-contain"
             />
             <div className="flex flex-col leading-none">
-              <span className="font-semibold text-2 text-gray-900 tracking-tight" style={{ fontFamily: 'Arial, Helvetica, sans-serif', fontWeight: 600 }}>
+              <span className="font-semibold text-lg text-gray-900 tracking-tight">
                 highway
               </span>
-              <span className="font-semibold text-2 text-gray-900 tracking-tight" style={{ fontFamily: 'Arial, Helvetica, sans-serif', fontWeight: 600 }}>
+              <span className="font-semibold text-lg text-gray-900 tracking-tight">
                 delite
               </span>
             </div>

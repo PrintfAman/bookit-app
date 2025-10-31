@@ -28,7 +28,7 @@ const Confirmation: React.FC = () => {
         <div className="bg-green-500 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
           <Check className="w-12 h-12 text-white" />
         </div>
-
+        
         <h1 className="text-4xl font-bold mb-2">Booking Confirmed</h1>
         <p className="text-gray-600 mb-2">Thank you for your booking!</p>
         <p className="text-gray-800 font-semibold mb-8">

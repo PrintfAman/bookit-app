@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import type { Experience } from '../types';
-;
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -10,7 +9,6 @@ interface ExperienceCardProps {
 const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience, onViewDetails }) => {
   const [imageError, setImageError] = useState(false);
   
-  // Fallback placeholder image
   const placeholderImage = 'https://via.placeholder.com/400x300/e5e7eb/6b7280?text=Experience';
 
   return (

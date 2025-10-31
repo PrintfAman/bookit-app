@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-// Type assertion to avoid TS errors without vite-env.d.ts
-const API_BASE_URL = (import.meta.env.VITE_API_URL as string) || 'http://localhost:5000';
+// ✅ Get API base URL from environment variables
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
+// ✅ Create Axios instance
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -11,6 +12,7 @@ const api = axios.create({
   withCredentials: true,
 });
 
+// ✅ Interceptors for error logging
 api.interceptors.response.use(
   (response) => response,
   (error) => {

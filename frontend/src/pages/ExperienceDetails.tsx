@@ -7,6 +7,7 @@ import TimeSlotSelector from '../components/TimeSlotSelector';
 import PriceSummary from '../components/PriceSummary';
 import { experienceAPI } from '../services/api';
 import type { Experience, Slot } from '../types';
+
 const ExperienceDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -34,8 +35,7 @@ const ExperienceDetails: React.FC = () => {
       setExperience(data);
       setSlots(data.slots || []);
 
-      // Extract unique dates
-      const dates = Array.from(new Set(data.slots?.map((s) => formatDate(s.date)) || []));
+      const dates = Array.from(new Set((data.slots || []).map((s: Slot) => formatDate(s.date))));
       setAvailableDates(dates);
       if (dates.length > 0) {
         setSelectedDate(dates[0]);
@@ -73,7 +73,7 @@ const ExperienceDetails: React.FC = () => {
 
   const handleConfirm = () => {
     if (!experience || !selectedSlot) return;
-
+    
     navigate('/checkout', {
       state: {
         experience,
@@ -129,14 +129,13 @@ const ExperienceDetails: React.FC = () => {
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Content */}
           <div className="lg:col-span-2">
             <img
               src={experience.image_url}
               alt={experience.title}
               className="w-full h-96 object-cover rounded-lg mb-6"
             />
-
+            
             <h1 className="text-3xl font-bold mb-2">{experience.title}</h1>
             <p className="text-gray-600 mb-8">{experience.description}</p>
 
@@ -163,7 +162,6 @@ const ExperienceDetails: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Sidebar */}
           <div className="lg:col-span-1">
             <PriceSummary
               price={experience.price}

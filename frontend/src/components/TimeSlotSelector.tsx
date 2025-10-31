@@ -1,6 +1,5 @@
 import React from 'react';
-import type { Slot } from '../types'
-;
+import type { Slot } from '../types';
 
 interface TimeSlotSelectorProps {
   slots: Slot[];

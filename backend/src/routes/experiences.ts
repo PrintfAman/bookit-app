@@ -47,4 +47,6 @@ export const getExperienceById = async (req: Request, res: Response) => {
     console.error('Error fetching experience:', error);
     res.status(500).json({ error: 'Failed to fetch experience details' });
   }
+  
 };
+export default router;

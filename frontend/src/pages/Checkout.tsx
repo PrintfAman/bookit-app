@@ -142,7 +142,6 @@ const Checkout: React.FC = () => {
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left - Form */}
           <div>
             <div className="bg-white p-6 rounded-lg shadow-md mb-6">
               <div className="grid grid-cols-2 gap-4 mb-4">
@@ -232,7 +231,6 @@ const Checkout: React.FC = () => {
             </div>
           </div>
 
-          {/* Right - Summary */}
           <div>
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="space-y-3 mb-6 text-sm">

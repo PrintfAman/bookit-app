@@ -93,4 +93,4 @@ const PriceSummary: React.FC<PriceSummaryProps> = ({
   );
 };
 
-export default PriceSummary;
+export default PriceSummary;  
