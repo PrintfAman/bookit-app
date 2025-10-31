@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 // ============================================
 
 // Get all experiences
-app.get(['/api/experiences', '/experiences'], async (req: Request, res: Response) => {
+app.get('/api/experiences', async (req: Request, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM experiences ORDER BY id ASC');
     res.json(result.rows);
@@ -35,7 +35,7 @@ app.get(['/api/experiences', '/experiences'], async (req: Request, res: Response
 });
 
 // Get experience by ID with slots
-app.get(['/api/experiences/:id', '/experiences/:id'], async (req: Request, res: Response) => {
+app.get('/api/experiences/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   
   try {
@@ -64,7 +64,8 @@ app.get(['/api/experiences/:id', '/experiences/:id'], async (req: Request, res: 
 // BOOKINGS ROUTES
 // ============================================
 
-app.post(['/api/bookings', '/bookings'], async (req: Request, res: Response) => {
+// Create booking
+app.post('/api/bookings', async (req: Request, res: Response) => {
   const {
     experience_id,
     slot_id,
@@ -140,7 +141,7 @@ app.post(['/api/bookings', '/bookings'], async (req: Request, res: Response) => 
 });
 
 // Get booking by reference
-app.get(['/api/bookings/:reference', '/bookings/:reference'], async (req: Request, res: Response) => {
+app.get('/api/bookings/:reference', async (req: Request, res: Response) => {
   const { reference } = req.params;
 
   try {
@@ -168,7 +169,8 @@ app.get(['/api/bookings/:reference', '/bookings/:reference'], async (req: Reques
 // PROMO CODE ROUTES
 // ============================================
 
-app.post(['/api/promo/validate', '/promo/validate'], async (req: Request, res: Response) => {
+// Validate promo code
+app.post('/api/promo/validate', async (req: Request, res: Response) => {
   const { code, subtotal } = req.body;
 
   if (!code || typeof code !== 'string') {
@@ -220,6 +222,7 @@ app.post(['/api/promo/validate', '/promo/validate'], async (req: Request, res: R
 // OTHER ROUTES
 // ============================================
 
+// Health check
 app.get('/health', (req: Request, res: Response) => {
   res.json({ 
     status: 'OK', 
@@ -227,6 +230,7 @@ app.get('/health', (req: Request, res: Response) => {
   });
 });
 
+// Root endpoint
 app.get('/', (req: Request, res: Response) => {
   res.json({ 
     message: 'BookIt API Server',

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import type { Experience, Booking, BookingRequest, PromoCodeResponse } from '../types';
+import type { Experience, Booking, BookingRequest, PromoCodeResponse } from '../types'
+;
 
-// Remove /api from here - we'll add it in Vercel env variable if needed
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const api = axios.create({
   baseURL: API_URL,
@@ -11,30 +11,23 @@ const api = axios.create({
   },
 });
 
-// Logging interceptors
+// Interceptor for logging
 api.interceptors.request.use(
   (config) => {
-    console.log(`API Request: ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`);
+    console.log(`API Request: ${config.method?.toUpperCase()} ${config.url}`);
     return config;
   },
   (error) => {
-    console.error('Request Error:', error);
     return Promise.reject(error);
   }
 );
 
 api.interceptors.response.use(
   (response) => {
-    console.log(`API Response: ${response.status} ${response.config.url}`);
     return response;
   },
   (error) => {
-    console.error('API Error:', {
-      message: error.message,
-      status: error.response?.status,
-      data: error.response?.data,
-      url: error.config?.url,
-    });
+    console.error('API Error:', error.response?.data || error.message);
     return Promise.reject(error);
   }
 );

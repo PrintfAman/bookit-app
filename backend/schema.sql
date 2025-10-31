@@ -1,8 +1,8 @@
--- Create database
-CREATE DATABASE bookit_db;
-
--- Connect to database
-\c bookit_db;
+-- Drop existing tables
+DROP TABLE IF EXISTS bookings CASCADE;
+DROP TABLE IF EXISTS slots CASCADE;
+DROP TABLE IF EXISTS experiences CASCADE;
+DROP TABLE IF EXISTS promo_codes CASCADE;
 
 -- Experiences table
 CREATE TABLE experiences (
@@ -49,7 +49,7 @@ CREATE TABLE bookings (
 CREATE TABLE promo_codes (
   id SERIAL PRIMARY KEY,
   code VARCHAR(50) UNIQUE NOT NULL,
-  discount_type VARCHAR(20) NOT NULL, -- 'percentage' or 'fixed'
+  discount_type VARCHAR(20) NOT NULL,
   discount_value DECIMAL(10, 2) NOT NULL,
   is_active BOOLEAN DEFAULT true,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -57,27 +57,52 @@ CREATE TABLE promo_codes (
 
 -- Insert sample experiences
 INSERT INTO experiences (title, description, location, price, image_url) VALUES
-('Kayaking', 'Curated small-group experience. Certified guide. Safety first with gear included. Helmet and Life jackets along with an expert will accompany in kayaking.', 'Udupi', 999.00, 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800'),
-('Nandi Hills Sunrise', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Bangalore', 899.00, 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800'),
-('Coffee Trail', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Coorg', 1299.00, 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=800'),
-('Kayaking Adventure', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Udupi, Karnataka', 999.00, 'https://images.unsplash.com/photo-1544551763-92ef2489b502?w=800'),
-('Boat Cruise', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Sunderbans', 999.00, 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800'),
-('Bunjee Jumping', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Manali', 999.00, 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800');
+('Kayaking', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Udupi', 999.00, 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80'),
+('Nandi Hills Sunrise', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Bangalore', 899.00, 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'),
+('Coffee Trail', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Coorg', 1299.00, 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80'),
+('Kayaking Adventure', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Udupi, Karnataka', 999.00, 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=800&q=80'),
+('Boat Cruise', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Sunderbans', 999.00, 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80'),
+('Bunjee Jumping', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Manali', 999.00, 'https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?w=800&q=80'),
+('Paragliding', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Bir Billing', 2999.00, 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800&q=80'),
+('Camping', 'Curated small-group experience. Certified guide. Safety first with gear included.', 'Rishikesh', 1499.00, 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&q=80');
 
--- Insert sample slots for experience 1 (Kayaking)
+-- Insert slots for all experiences
 INSERT INTO slots (experience_id, date, time, available_spots, total_spots) VALUES
-(1, '2025-10-22', '07:00:00', 4, 10),
-(1, '2025-10-22', '09:00:00', 5, 10),
-(1, '2025-10-22', '11:00:00', 5, 10),
-(1, '2025-10-22', '13:00:00', 0, 10),
-(1, '2025-10-23', '07:00:00', 8, 10),
-(1, '2025-10-23', '09:00:00', 6, 10),
-(1, '2025-10-24', '07:00:00', 10, 10),
-(1, '2025-10-24', '09:00:00', 10, 10),
-(1, '2025-10-25', '07:00:00', 7, 10),
-(1, '2025-10-26', '07:00:00', 9, 10);
+-- Experience 1 slots
+(1, '2025-11-22', '07:00:00', 4, 10),
+(1, '2025-11-22', '09:00:00', 5, 10),
+(1, '2025-11-23', '07:00:00', 8, 10),
+(1, '2025-11-23', '09:00:00', 6, 10),
+-- Experience 2 slots
+(2, '2025-11-22', '05:00:00', 6, 10),
+(2, '2025-11-22', '06:00:00', 8, 10),
+(2, '2025-11-23', '05:00:00', 10, 10),
+-- Experience 3 slots
+(3, '2025-11-22', '08:00:00', 5, 10),
+(3, '2025-11-22', '10:00:00', 7, 10),
+(3, '2025-11-23', '08:00:00', 10, 10),
+-- Experience 4 slots
+(4, '2025-11-22', '07:00:00', 4, 10),
+(4, '2025-11-22', '09:00:00', 6, 10),
+(4, '2025-11-23', '07:00:00', 10, 10),
+-- Experience 5 slots
+(5, '2025-11-22', '11:00:00', 8, 10),
+(5, '2025-11-22', '14:00:00', 7, 10),
+(5, '2025-11-23', '11:00:00', 10, 10),
+-- Experience 6 slots
+(6, '2025-11-22', '10:00:00', 5, 10),
+(6, '2025-11-22', '12:00:00', 6, 10),
+(6, '2025-11-23', '10:00:00', 10, 10),
+-- Experience 7 slots
+(7, '2025-11-22', '09:00:00', 6, 10),
+(7, '2025-11-22', '11:00:00', 8, 10),
+(7, '2025-11-23', '09:00:00', 10, 10),
+-- Experience 8 slots
+(8, '2025-11-22', '16:00:00', 5, 10),
+(8, '2025-11-22', '18:00:00', 9, 10),
+(8, '2025-11-23', '16:00:00', 10, 10);
 
--- Insert sample promo codes
+-- Insert promo codes
 INSERT INTO promo_codes (code, discount_type, discount_value, is_active) VALUES
 ('SAVE10', 'percentage', 10.00, true),
 ('FLAT100', 'fixed', 100.00, true),
