@@ -13,10 +13,28 @@ const Home: React.FC = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // ✅ Single fetch function
+  const fetchExperiences = async () => {
+    try {
+      setLoading(true);
+      const data = await experienceAPI.getAll();
+      console.log('Fetched experiences:', data);
+      setExperiences(data);
+      setFilteredExperiences(data);
+    } catch (err: any) {
+      console.error('Error fetching experiences:', err);
+      setError('Failed to load experiences. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ✅ Call it once on mount
   useEffect(() => {
     fetchExperiences();
   }, []);
 
+  // ✅ Filter logic
   useEffect(() => {
     if (searchQuery.trim() === '') {
       setFilteredExperiences(experiences);
@@ -29,20 +47,6 @@ const Home: React.FC = () => {
       setFilteredExperiences(filtered);
     }
   }, [searchQuery, experiences]);
-
-  const fetchExperiences = async () => {
-    try {
-      setLoading(true);
-      const data = await experienceAPI.getAll();
-      setExperiences(data);
-      setFilteredExperiences(data);
-    } catch (err: any) {
-      setError('Failed to load experiences. Please try again later.');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleViewDetails = (experience: Experience) => {
     navigate(`/experience/${experience.id}`);

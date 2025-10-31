@@ -19,16 +19,19 @@ api.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
 api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   (error) => {
-    console.error('API Error:', error.response?.data || error.message);
+    console.error('🌐 API Error Details:', {
+      message: error.message,
+      data: error.response?.data,
+      status: error.response?.status,
+      url: error.config?.url,
+    });
     return Promise.reject(error);
   }
 );
+
 
 export const experienceAPI = {
   getAll: async (): Promise<Experience[]> => {
@@ -68,4 +71,4 @@ export const promoAPI = {
   },
 };
 
-export default api;
+export default api; 
