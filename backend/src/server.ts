@@ -2,9 +2,11 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import pool from './config/database';
+import experiencesRouter from './routes/experiences';
 
 
 dotenv.config();
+
 
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
@@ -21,11 +23,13 @@ app.use((req, res, next) => {
   next();
 });
 
+
 // ============================================
 // EXPERIENCES ROUTES
 // ============================================
 
 // Get all experiences
+app.use('/api/experiences', experiencesRouter);
 app.get('/api/experiences', async (req: Request, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM experiences ORDER BY id ASC');
