@@ -29,7 +29,17 @@ app.use((req, res, next) => {
 // ============================================
 
 // Get all experiences
-app.use('/api/experiences', experiencesRouter);
+// Temporary route fix for frontend expecting /experiences instead of /api/experiences
+// ✅ Fix: redirect old /experiences calls to /api/experiences
+app.use("/experiences", (req, res, next) => {
+  req.url = "/api" + req.url;
+  next();
+});
+
+app.use("/api/experiences", experiencesRouter);
+
+
+
 app.get('/api/experiences', async (req: Request, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM experiences ORDER BY id ASC');

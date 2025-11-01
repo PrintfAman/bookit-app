@@ -4,6 +4,6 @@ import { getAllExperiences, getExperienceById } from '../controllers/experienceC
 const router = Router();
 
 router.get('/', getAllExperiences);
-router.get('/:id', getExperienceById);
+
 
 export default router;
